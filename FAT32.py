@@ -67,7 +67,6 @@ class FAT32:
 		self.file.seek(self.start)
 		stream = self.file.read(struct.calcsize(FAT32.fmt()))
 		datas = struct.unpack(FAT32.fmt(), stream).__iter__()
-		pdb.set_trace()
 		for key, _ in FAT32.keys:
 			self.infos[key]= datas.__next__()
 
