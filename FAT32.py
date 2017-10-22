@@ -1,5 +1,6 @@
 from section import section
 import struct
+import pdb
 
 class FAT32(section):
 
@@ -37,11 +38,11 @@ class FAT32(section):
 	def getKeys(self):
 		return FAT32.keys
 
-	## Regarde si l'attribue start est bien indiqué, si ce n'est pas le cas, il n'arrivera pas à parser par la suite,
+	## Regarde si l'attribut start est bien indiqué, si ce n'est pas le cas, il n'arrivera pas à parser par la suite,
 	## pour ne pas perdre trop de temps, on essaye juste de récupérer des éléments qu'on connait
 	def pre_parse(self):
 		## le magic number se trouve 420 bytes apres les informations que l'on va parser,
-		## pour le 8c, c'est la taille du nom qui est traiter de facon particuliere
+		## pour le 8c, c'est la taille du nom qui est traité de facon particuliere
 		self.file.seek(self.start+struct.calcsize(self.fmt()+"8c420x"))
 		pre_format="H"
 		magic_number = struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0]
@@ -50,8 +51,9 @@ class FAT32(section):
 			raise NameError('Parsing failed ' + str(magic_number))
 
 		self.file.seek(self.start+struct.calcsize(self.fmt()))
-		pre_format="8c"
-		magic_string = b''.join(struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))).decode('UTF-8')
+		pre_format="8s"
+		pdb.set_trace()
+		magic_string = struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0].decode('UTF-8')
 		if magic_string != "FAT32   ":
 			raise NameError('Parsing failed ' + magic_string)
 		self.infos["MAGIC_NUMBER"]=magic_number

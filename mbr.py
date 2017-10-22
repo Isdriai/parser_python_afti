@@ -14,21 +14,18 @@ class mbr(section):
 		("CHSlast1", "3s"), # pas grave si c'est un string, c'est un champ obsolete
 		("LBA1", "I"),
 		("NBRsector1", "I"),
-
 		("Boot2", "B"),
 		("CHSfirst2", "3s"), # pas grave si c'est un string, c'est un champ obsolete
 		("Type2", "B"),
 		("CHSlast2", "3s"), # pas grave si c'est un string, c'est un champ obsolete
 		("LBA2", "I"),
 		("NBRsector2", "I"),
-
 		("Boot3", "B"),
 		("CHSfirst3", "3s"), # pas grave si c'est un string, c'est un champ obsolete
 		("Type3", "B"),
 		("CHSlast3", "3s"), # pas grave si c'est un string, c'est un champ obsolete
 		("LBA3", "I"),
 		("NBRsector3", "I"),
-
 		("Boot4", "B"),
 		("CHSfirst4", "3s"), # pas grave si c'est un string, c'est un champ obsolete
 		("Type4", "B"),
