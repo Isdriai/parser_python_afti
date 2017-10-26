@@ -1,6 +1,5 @@
 from section import section
 import struct
-import pdb
 
 class fat32SectorBoot(section):
 
@@ -52,7 +51,6 @@ class fat32SectorBoot(section):
 
 		self.file.seek(self.start+struct.calcsize(self.fmt()))
 		pre_format="8s"
-		pdb.set_trace()
 		magic_string = struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0].decode('UTF-8')
 		if magic_string != "FAT32   ":
 			raise NameError('Parsing failed ' + magic_string)
