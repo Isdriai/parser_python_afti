@@ -46,4 +46,4 @@ class mbr(section):
 			raise NameError('Parsing failed ' + str(magic_number))
 	
 	def __init__(self, name, start):
-		super().__init__( name,start)
+		super().__init__(name, start)

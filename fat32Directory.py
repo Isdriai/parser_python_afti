@@ -46,18 +46,18 @@ class fat32Directory(section):
 		if dotdotFile != "..         ":
 			raise NameError('Parsing failed ')
 
-	def anotherEntry(self):
+	def endFile(self):
 		self.file.seek(self.start)
 		pre_format="b"
-		return struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format))) != 0x00:
+		return struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0] == 0x00:
 			
 	def parse(self):
 		self.nbrEntry=0
 		while True:
 			super(self)
-			self.nbrEntry++
+			self.nbrEntry+=1
 			self.start+=getTailleFormat(self)
-			anotherEntry(self) ? : break
+			break if endFile(self) else pass
 
 	def __init__(self, name, start):
 		super().__init__(name, start)
