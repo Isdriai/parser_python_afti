@@ -22,8 +22,7 @@ class fat32Directory(section):
 		]
 
 	def getKeys(self):
-		return getFormatX(self, self.nbrEntry)
-
+		return self.getFormatX(self.nbrEntry)
 
 	def getTailleFormat(self):
 		return struct.calcsize(self.fmt())
@@ -38,7 +37,7 @@ class fat32Directory(section):
 			raise NameError('Parsing failed ')
 
 		# fmt() va donner le format pour une entrée
-		self.file.seek(self.start+getTailleFormat(self))
+		self.file.seek(self.start+self.getTailleFormat())
 		pre_format="11s"
 		dotdotFile = struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0].decode('UTF-8')
 		
@@ -49,15 +48,16 @@ class fat32Directory(section):
 	def endFile(self):
 		self.file.seek(self.start)
 		pre_format="b"
-		return struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0] == 0x00:
+		return struct.unpack(pre_format, self.file.read(struct.calcsize(pre_format)))[0] == 0x00
 			
 	def parse(self):
-		self.nbrEntry=0
 		while True:
-			super(self)
+			super(fat32Directory, self).parse()
 			self.nbrEntry+=1
-			self.start+=getTailleFormat(self)
-			break if endFile(self) else pass
+			self.start+=self.getTailleFormat()
+			if self.endFile():
+				break
 
 	def __init__(self, name, start):
+		self.nbrEntry=0
 		super().__init__(name, start)
