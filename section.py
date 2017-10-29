@@ -13,7 +13,7 @@ class section(object):
 		raise NameError("veuillez définir cette méthode, elel doit renvoyer un dictionnaire")
 		
 	def pre_parse(self):
-		print("veuillez redefinir la fonction de pre parsage, si elle rencontre un probleme, elle doit renvoyer un NameError(\"\"")
+		print("veuillez redefinir la fonction de pre parsage")
 
 	def parse(self):
 		#self.file.seek(self.start)
