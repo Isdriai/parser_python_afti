@@ -14,7 +14,7 @@ def main():
 	for adresse in range(0, 0x1c00000, 0x10):
 		# Attention, tester le fat32SectorBoot avant le mbr car ils ont le meme number magic, mais le fat32SectorBoot
 		# a besoin d'un deuxieme element pour etre identifié
-		for forme in [fat32SectorBoot, mbr, fat32Directory, fat32Directory, fat32Directory]:
+		for forme in [fat32SectorBoot, mbr, fat32Directory, fat32InfoSector]:
 			try:
 				test_parse=forme(fichier, adresse)
 				sections.add(test_parse)
